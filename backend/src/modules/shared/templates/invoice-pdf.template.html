@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --primary-color: {{primaryColor}};
+            --secondary-color: {{secondaryColor}};
+            --text-dark: {{textDark}};
+            --brand-white: {{brandWhite}};
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            min-height: 297mm;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.55;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .container {
+            width: 100%;
+            min-height: 273mm;
+            margin: 0;
+            padding: 0 4mm;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 22px;
+            margin-bottom: 28px;
+        }
+        .school-info h1 { margin: 0; color: var(--primary-color); font-size: 30px; }
+        .school-info p { margin: 6px 0 0; font-size: 13px; color: #6b7280; }
+        .invoice-title { text-align: right; }
+        .invoice-title h2 { margin: 0; color: #374151; font-size: 32px; text-transform: uppercase; }
+        .invoice-title p { margin: 4px 0 8px; font-size: 16px; font-weight: 600; }
+        .invoice-kind {
+            margin: 0 0 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+            text-transform: uppercase;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-paid { background: #d1fae5; color: #065f46; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-overdue { background: #fee2e2; color: #991b1b; }
+        .details-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .bill-to, .invoice-details { width: 48%; }
+        .details-section p { margin: 0; line-height: 1.45; }
+        .child-names {
+            margin-top: 8px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .bill-to h3, .invoice-details h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin: 0 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 26px;
+            font-size: 14px;
+        }
+        .items-table th {
+            background: #f0fdfa;
+            text-align: left;
+            padding: 16px 18px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        .items-table td { padding: 12px 14px; border-bottom: 1px solid #e5e7eb; }
+        .items-table td:nth-child(2) { text-align: center; }
+        .items-table td:nth-child(3), .items-table td:nth-child(4) { text-align: right; }
+        .totals-section { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .totals-table { width: 260px; font-size: 14px; }
+        .totals-table td { padding: 10px 0; }
+        .totals-table td:last-child { text-align: right; font-weight: 600; }
+        .grand-total {
+            border-top: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 18px;
+            padding-top: 12px !important;
+        }
+        .bank-box {
+            margin-top: 28px;
+            margin-bottom: 8px;
+            padding: 20px 22px;
+            background: #f0fdfa;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .bank-box h3 {
+            margin: 0 0 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+        .bank-box p { margin: 6px 0; }
+        .pay-now-box {
+            margin-top: 18px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .pay-now-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--brand-white);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .notes-box {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: #fffbeb;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .notes-box h3 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; color: #b45309; }
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .header, .details-section, .items-table, .totals-section, .bank-box, .pay-now-box, .notes-box {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="school-info">
+                <h1>{{schoolName}}</h1>
+                <p>{{schoolAddress}}<br>{{schoolPhone}} | {{schoolEmail}}</p>
+            </div>
+            <div class="invoice-title">
+                <h2>Invoice</h2>
+                <p>#{{invoiceNumber}}</p>
+                <p class="invoice-kind">{{invoiceKindLabel}}</p>
+                <span class="badge status-{{invoiceStatus}}">{{invoiceStatus}}</span>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <div class="bill-to">
+                <h3>Bill To</h3>
+                <p><strong>{{recipientName}}</strong><br>{{recipientEmail}}<br>{{recipientPhone}}</p>
+                {{#if hasChildNames}}
+                <div class="child-names"><strong>Child(ren):</strong> {{childNamesLine}}</div>
+                {{/if}}
+            </div>
+            <div class="invoice-details">
+                <h3>Details</h3>
+                <p><strong>Date:</strong> {{invoiceDate}}<br><strong>Due:</strong> {{dueDate}}</p>
+            </div>
+        </div>
+
+        {{#if title}}
+        <div style="margin-bottom: 18px; font-size: 13px;"><strong>Reference:</strong> {{title}}</div>
+        {{/if}}
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th style="text-align: center;">Qty</th>
+                    <th style="text-align: right;">Rate</th>
+                    <th style="text-align: right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items}}
+                <tr>
+                    <td>{{description}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{unitPriceFormatted}}</td>
+                    <td>{{totalAmountFormatted}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <div class="totals-section">
+            <table class="totals-table">
+                <tr><td>Subtotal</td><td>{{subtotalFormatted}}</td></tr>
+                {{#if discountAmount}}
+                <tr><td>Discount</td><td>-{{discountAmountFormatted}}</td></tr>
+                {{/if}}
+                {{#if taxAmount}}
+                <tr><td>{{taxLabel}}</td><td>{{taxAmountFormatted}}</td></tr>
+                {{/if}}
+                <tr class="grand-total"><td><strong>Total</strong></td><td><strong>{{totalFormatted}}</strong></td></tr>
+                {{#if amountPaid}}
+                <tr><td>Amount Paid</td><td>{{amountPaidFormatted}}</td></tr>
+                <tr><td>Balance Due</td><td>{{amountDueFormatted}}</td></tr>
+                {{/if}}
+            </table>
+        </div>
+
+        {{#if showBankDetails}}
+        <div class="bank-box">
+            <h3>Payment details</h3>
+            {{paymentMethodRow}}
+            <p><strong>Bank name:</strong> {{paymentBankName}}</p>
+            <p><strong>Account number:</strong> {{paymentAccountNumber}}</p>
+            <p><strong>Account name:</strong> {{paymentAccountName}}</p>
+        </div>
+        {{/if}}
+
+        {{#if showPayNowButton}}
+        <div class="pay-now-box">
+            <a class="pay-now-button" href="{{payNowUrl}}">Pay Now</a>
+        </div>
+        {{/if}}
+
+        {{#if notes}}
+        <div class="notes-box">
+            <h3>Notes</h3>
+            <p style="margin: 0;">{{notes}}</p>
+        </div>
+        {{/if}}
+
+        <div class="footer">
+            <p>Thank you for choosing {{schoolName}}.</p>
+            <p>&copy; {{currentYear}} {{schoolName}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

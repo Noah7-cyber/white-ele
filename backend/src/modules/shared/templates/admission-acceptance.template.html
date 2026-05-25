@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: {
+                    {
+                    primaryColor
+                }
+            }
+
+            ;
+
+            --secondary-color: {
+                    {
+                    secondaryColor
+                }
+            }
+
+            ;
+
+            --text-dark: {
+                    {
+                    textDark
+                }
+            }
+
+            ;
+
+            --brand-white: {
+                    {
+                    brandWhite
+                }
+            }
+
+            ;
+        }
+
+        @page {
+            margin: 0;
+            size: A4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lora', serif;
+            color: var(--text-dark);
+            font-size: 13px;
+            line-height: 1.55;
+            background: var(--brand-white);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 186mm;
+            min-height: 273mm;
+            margin: 0 auto;
+            padding: 16mm 14mm;
+            position: relative;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 80px;
+            font-family: 'EB Garamond', serif;
+            font-weight: 700;
+            color: var(--primary-color);
+            opacity: 0.03;
+            letter-spacing: 0.1em;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .main {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header - compact single block */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header img {
+            max-height: 72px;
+            width: auto;
+            display: block;
+            margin: 0 auto 8px;
+        }
+
+        .header .school-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            margin: 0 0 4px;
+        }
+
+        .header .school-motto {
+            font-size: 13px;
+            color: #6b7280;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* To / Date - single row */
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        .meta-row .to strong {
+            font-size: 14px;
+        }
+
+        .meta-row .date {
+            color: #6b7280;
+        }
+
+        /* Title */
+        .title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'EB Garamond', serif;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            margin-bottom: 18px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Body - compact */
+        .body {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .body p {
+            margin: 0 0 12px;
+        }
+
+        .body .highlight {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .body .steps {
+            margin: 14px 0;
+            padding-left: 18px;
+        }
+
+        .body .steps li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .body .steps li::marker {
+            color: var(--primary-color);
+        }
+
+        .body .due-date {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* Approval Stamp */
+        .stamp-wrap {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .stamp {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px double var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-18deg);
+            opacity: 0.82;
+            padding: 8px;
+            text-align: center;
+            box-shadow: inset 0 0 0 2px var(--primary-color);
+        }
+
+        .stamp-text-top {
+            font-family: 'EB Garamond', serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+
+        .stamp-main {
+            font-family: 'EB Garamond', serif;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .stamp-text-bottom {
+            font-family: 'EB Garamond', serif;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-top: 2px;
+        }
+
+
+        /* Footer */
+        .footer {
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="watermark">OFFER GRANTED</div>
+        <div class="main">
+            <header class="header">
+                {{#if schoolLogoUrl}}
+                <img src="{{schoolLogoUrl}}" alt="{{schoolName}}">
+                {{/if}}
+                <h1 class="school-name">{{schoolName}}</h1>
+                {{#if schoolMotto}}<p class="school-motto">"{{schoolMotto}}"</p>{{/if}}
+            </header>
+
+            <div class="meta-row">
+                <div class="to">
+                    To,<br>
+                    <strong>{{parentName}}</strong><br>
+                    Parent of <span class="highlight">{{studentName}}</span>
+                </div>
+                <div class="date">Dated: <strong style="color: var(--text-dark);">{{currentDate}}</strong></div>
+            </div>
+
+            <h2 class="title">Provisional Offer of Admission</h2>
+
+            <div class="body">
+                <p>Dear {{parentName}},</p>
+                <p>On behalf of the Admissions Committee, we are pleased to inform you that <span
+                        class="highlight">{{studentName}}</span> has been offered provisional admission into <span
+                        class="highlight">{{className}}</span> at <strong>{{schoolName}}</strong> for the upcoming
+                    academic session.</p>
+                <p>This decision is based on our evaluation of the application. We are confident that {{studentName}}
+                    will thrive within our learning community.</p>
+                <p><strong>To secure this placement, please complete the following steps:</strong></p>
+                <ol class="steps">
+                    <li>Review the attached fee structure and initial invoice.</li>
+                    <li>Ensure payment of the registration and tuition fees on or before <span
+                            class="due-date">{{dueDate}}</span>.</li>
+                    <li>Submit any outstanding enrollment documentation via the parent portal.</li>
+                </ol>
+                <p>We look forward to welcoming {{studentName}} to our community. Congratulations on this achievement.
+                </p>
+            </div>
+
+            <div class="stamp-wrap">
+                <div class="stamp">
+                    <div class="stamp-text-top">{{schoolName}}</div>
+                    <div class="stamp-main">Approved</div>
+                    <div class="stamp-text-bottom">Admissions</div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>{{schoolAddress}} | {{schoolPhone}} | {{schoolEmail}}</p>
+                <p>&copy; {{currentYear}} {{schoolName}} Admissions</p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

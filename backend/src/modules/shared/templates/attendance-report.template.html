@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --primary-color: {{primaryColor}};
+            --secondary-color: {{secondaryColor}};
+            --text-dark: {{textDark}};
+            --brand-white: {{brandWhite}};
+            --brand-surface-tint: {{brandSurfaceTint}};
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            min-height: 297mm;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.55;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .container { width: 100%; margin: 0; padding: 0 4mm; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            margin-top: 48px; /* Room for the absolutely positioned logo */
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            position: relative;
+            text-align: left;
+            align-items: flex-start;
+        }
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-align: right;
+            align-items: flex-end;
+        }
+        
+        .logo-wrap {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin: 0 0 10px 0; /* Added bottom margin for spacing */
+            padding: 0;
+            line-height: 0;
+        }
+        .school-logo {
+            max-height: 42px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .school-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+        .school-info-text, .report-title-text, .report-meta-text {
+            font-size: 13px;
+            font-weight: 400;
+            color: #6b7280;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+        .report-title-text {
+            color: var(--text-dark);
+        }
+        .report-meta-text {
+            color: #9ca3af;
+        }
+        .summary-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .summary-card {
+            flex: 1;
+            min-width: 140px;
+            padding: 16px 18px;
+            background: var(--brand-surface-tint);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .summary-card h3 {
+            margin: 0 0 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #6b7280;
+            font-weight: 600;
+        }
+        .summary-card .value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .summary-card .sub { font-size: 12px; color: #6b7280; margin-top: 4px; }
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 24px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .trend-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 24px;
+        }
+        .trend-table th {
+            background: var(--brand-surface-tint);
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        .trend-table td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; }
+        .trend-table td:nth-child(2), .trend-table td:nth-child(3), .trend-table td:nth-child(4) { text-align: center; }
+        .no-data {
+            padding: 24px;
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        .footer {
+            margin-top: 36px;
+            padding-top: 22px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                {{#if schoolLogoUrl}}<div class="logo-wrap"><img class="school-logo" src="{{schoolLogoUrl}}" alt="" /></div>{{/if}}
+                <div class="school-name">{{schoolName}}</div>
+                <div class="school-info-text">{{schoolAddress}}</div>
+                <div class="school-info-text">{{schoolPhone}} | {{schoolEmail}}</div>
+            </div>
+            <div class="header-right">
+                <div class="report-title-text">{{reportTitle}}</div>
+                <div class="report-meta-text">{{dateRange}}</div>
+                <div class="report-meta-text">Generated: {{generatedDate}}</div>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3>Overall Attendance Rate</h3>
+                <div class="value">{{overallAttendanceRate}}%</div>
+            </div>
+            <div class="summary-card">
+                <h3>{{mostPresentLabel}}</h3>
+                <div class="value">{{mostPresentName}}</div>
+                <div class="sub">{{mostPresentRate}}% attendance</div>
+            </div>
+            <div class="summary-card">
+                <h3>{{highestAbsenteeLabel}}</h3>
+                <div class="value">{{highestAbsenteeName}}</div>
+                <div class="sub">{{highestAbsenteeRate}}% attendance</div>
+            </div>
+            <div class="summary-card">
+                <h3>Lateness Rate</h3>
+                <div class="value">{{latenessRate}}%</div>
+            </div>
+        </div>
+
+        <div class="section-title">Attendance Trend</div>
+        {{#if hasTrendData}}
+        <table class="trend-table">
+            <thead>
+                <tr>
+                    <th>Period</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                    <th>Late</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each trendRows}}
+                <tr>
+                    <td>{{period}}</td>
+                    <td>{{present}}</td>
+                    <td>{{absent}}</td>
+                    <td>{{late}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <div class="no-data">No attendance trend data for the selected period.</div>
+        {{/if}}
+
+        <div class="footer">
+            <p>{{reportTitle}} - {{schoolName}}</p>
+            <p>&copy; {{currentYear}} {{schoolName}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

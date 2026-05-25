@@ -1,0 +1,55 @@
+name: 🚀 Deploy to EC2 (Build on GitHub + PM2)
+
+env:
+  PRIVATE_KEY: ${{ secrets.AWS_DEV_SSH_KEYPEM }}
+
+on:
+  push:
+    branches: ["base_branch"]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🔧 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: 📦 Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: 🔨 Build app
+        run: npm run build
+
+      - name: 🔑 Setup SSH key
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+
+      - name: 🚀 Deploy built app to EC2
+        run: |
+          scp -o StrictHostKeyChecking=no -i private_key -r dist package.json package-lock.json ${{ secrets.AWS_DEV_SSH_USER }}@${{ secrets.AWS_DEV_EC2_IP }}:/home/ubuntu/tmp
+
+      - name: 🔁 Restart PM2 on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key ${{ secrets.AWS_DEV_SSH_USER }}@${{ secrets.AWS_DEV_EC2_IP }} << 'EOF'
+
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            cd /home/ubuntu/tmp
+
+            echo "🔁 Reloading PM2 app..."
+            pm2 reload tmp --update-env
+
+            echo "💾 Saving PM2 process list..."
+            pm2 save
+
+            echo "📋 PM2 status:"
+            pm2 status
+
+          EOF
