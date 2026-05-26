@@ -201,6 +201,7 @@ export interface AuthResponse {
   requiresMFA?: boolean;
   mfaToken?: string;
   message: string;
+  code?: string;
   // Grouped structure requested by client
   accounts?: AccountsGroupedByRole[];
   multipleAccounts?: boolean;
