@@ -19,7 +19,29 @@ export function middleware(req: NextRequest) {
   const canAttemptSessionRestore = !accessToken && keepMeLoggedIn && Boolean(refreshToken);
 
   // Get user role from cookie (set during login)
-  const userRole = req.cookies.get("userRole")?.value?.toLowerCase();
+  let userRole = req.cookies.get("userRole")?.value?.toLowerCase();
+
+  // Decode JWT to extract flags if accessToken exists
+  let isVerified = true;
+  let schoolId = null;
+  if (accessToken) {
+    try {
+      const base64Url = accessToken.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      const decoded = JSON.parse(jsonPayload);
+      if (decoded.isVerified !== undefined) isVerified = decoded.isVerified;
+      if (decoded.schoolId !== undefined) schoolId = decoded.schoolId;
+      if (!userRole && decoded.role) userRole = decoded.role.toLowerCase();
+    } catch (e) {
+      console.error('Failed to parse token in middleware', e);
+    }
+  }
 
   // Define route-to-role mapping
   const routeRoleMap: Record<string, string> = {
@@ -35,6 +57,17 @@ export function middleware(req: NextRequest) {
       if (!accessToken && !canAttemptSessionRestore) {
         const loginUrl = buildRoleLoginUrl(req, requiredRole, pathWithQuery);
         return NextResponse.redirect(loginUrl);
+      }
+
+      // If token exists, enforce onboarding steps based on decoded properties
+      if (accessToken) {
+        if (!isVerified) {
+          return NextResponse.redirect(new URL('/auth/verify-email', req.url));
+        }
+
+        if (!schoolId && requiredRole === "admin") {
+          return NextResponse.redirect(new URL('/auth/create-school-account', req.url));
+        }
       }
 
       // Missing role cookie: route user to role selection so they can establish role context.

@@ -1,0 +1,11 @@
+--- backend/src/modules/auth/types/types.ts
++++ backend/src/modules/auth/types/types.ts
+@@ -235,6 +235,8 @@
+   email?: string;
+   phone?: string;
+   role: UserRole;
++  isVerified: boolean;
++  schoolId?: number | null;
+   sessionId?: number;
+   tokenType: "access" | "refresh" | "mfa" | "password_reset";
+   iat: number;
