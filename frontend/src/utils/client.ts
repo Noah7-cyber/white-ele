@@ -5,10 +5,10 @@ import axios, { AxiosHeaders, AxiosInstance, InternalAxiosRequestConfig } from "
 // import { getToken } from "./utils";
 import { sessionEventEmitter } from "./eventEmitters";
 import { debounceHandler } from "./debounceHandler";
+import { getSession } from "next-auth/react";
 import {
   getSchoolFromCookie,
   getKeepMeLoggedInPreference,
-  getToken,
   getRefreshTokenFromCookie,
   setAuthTokenCookies,
   isAccessTokenExpired,
@@ -249,7 +249,8 @@ export class Client<Response extends object> {
           requestUrl.includes(path),
         );
         if (!isRefreshRequest) {
-          const token = getToken();
+          const session = await getSession();
+          const token = (session as any)?.accessToken || (session as any)?.user?.accessToken;
           // Allow callers to provide their own Authorization (e.g. kiosk reset PIN without changing session)
           if (!headers.has("Authorization") && token) {
             headers.set("Authorization", `Bearer ${token}`);
