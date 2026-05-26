@@ -40,7 +40,9 @@ export function showToast({
       setOpen(false);
       setTimeout(() => {
         root.unmount();
-        document.body.removeChild(container);
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
       }, 300);
     };
 
