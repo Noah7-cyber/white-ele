@@ -19,7 +19,6 @@ export function useVerifyEmail() {
   const searchParams = useSearchParams();
   const emailFromUrlRef = useRef<string | null>(null);
   const [emailFromUrl, setEmailFromUrl] = useState<string | null>(null);
-  const [isInvalidLink, setIsInvalidLink] = useState<boolean>(false);
 
   const emailParam = searchParams.get("email");
 
@@ -38,15 +37,20 @@ export function useVerifyEmail() {
   // Pre-fill email from URL params if available (decrypt if encrypted)
   useEffect(() => {
     if (emailParam) {
-      const decrypted = decryptUrlParam(emailParam);
-      if (decrypted === null) {
-        setIsInvalidLink(true);
-      } else {
-        const email = decrypted || emailParam; // Fallback to raw if empty string
-        emailFromUrlRef.current = email;
-        setEmailFromUrl(email);
-        setValue("email", email, { shouldValidate: true });
+      let email = emailParam;
+      // Try to decrypt - if it fails, treat as plain text
+      try {
+        const decrypted = decryptUrlParam(emailParam);
+        if (decrypted) {
+          email = decrypted;
+        }
+      } catch {
+        email = emailParam;
       }
+
+      emailFromUrlRef.current = email;
+      setEmailFromUrl(email);
+      setValue("email", email, { shouldValidate: true });
     }
   }, [emailParam, setValue]);
 
@@ -137,6 +141,5 @@ export function useVerifyEmail() {
     email: emailFromUrl || "",
     hasEmailFromUrl: !!emailFromUrl,
     router,
-    isInvalidLink,
   };
 }

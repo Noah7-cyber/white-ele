@@ -13,7 +13,7 @@ import { useMutationService } from "@/utils/hooks/useMutationService";
 import { authServices } from "@/services/auth.service";
 
 const VerifyEmailForm = () => {
-  const { control, handleSubmit, isPending, email, hasEmailFromUrl, router, getValues, isInvalidLink } =
+  const { control, handleSubmit, isPending, email, hasEmailFromUrl, router, getValues } =
     useVerifyEmail();
   const [resendCooldown, setResendCooldown] = useState(0);
   const [resentOnce, setResentOnce] = useState(false);
@@ -45,47 +45,6 @@ const VerifyEmailForm = () => {
     setResentOnce(true);
     setResendCooldown(60);
   };
-
-  if (isInvalidLink) {
-    return (
-      <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
-        <Box className="flex w-full max-w-[540px] flex-col gap-5 rounded-2xl bg-white p-5 shadow-md sm:gap-6 sm:p-10 text-center items-center">
-          <Typography className="!font-bold !text-secondary-text-gray leading-[1.2] !text-2xl mt-4">
-            Invalid Link
-          </Typography>
-          <Typography className="!text-secondary-text-gray !font-normal !text-sm mb-4">
-            This verification link is invalid, malformed, or has expired.
-          </Typography>
-
-          <Button
-            className="text-primary-white !bg-brandColor-active w-full"
-            onClick={() => router.push(AuthRoutes.selectRole)}
-            sx={{
-              textTransform: "none",
-              borderRadius: "8px",
-              height: "48px",
-              py: 1.2,
-            }}
-          >
-            Back to Login
-          </Button>
-          <Button
-            className="w-full"
-            variant="outlined"
-            onClick={() => router.push(AuthRoutes.resendEmailVerification)}
-            sx={{
-              textTransform: "none",
-              borderRadius: "8px",
-              height: "48px",
-              py: 1.2,
-            }}
-          >
-            Request New Link
-          </Button>
-        </Box>
-      </Box>
-    );
-  }
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
