@@ -39,10 +39,10 @@ export function encryptUrlParam(value: string): string {
 /**
  * Decrypts a string value from URL parameters
  * @param encryptedValue - The encrypted and base64-encoded string from URL
- * @returns Decrypted string
+ * @returns Decrypted string or null if decryption fails
  */
-export function decryptUrlParam(encryptedValue: string): string {
-  if (!encryptedValue) return "";
+export function decryptUrlParam(encryptedValue: string): string | null {
+  if (!encryptedValue) return null;
 
   try {
     // Restore base64 padding and URL-safe characters
@@ -67,6 +67,6 @@ export function decryptUrlParam(encryptedValue: string): string {
     return decrypted;
   } catch (error) {
     console.error("Decryption error:", error);
-    return ""; // Return empty string on error
+    return null; // Return null on error
   }
 }
