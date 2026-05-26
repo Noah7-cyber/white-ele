@@ -1,111 +1,170 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'react-chat-elements/dist/main.css';
 
-@layer base {
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: normal;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/AvenirLTStd-Book.otf');
+@layer utilities {
+  .ripple {
+    transform: scale(0);
+    opacity: 0.75;
+    animation: ripple-effect 850ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  @font-face {
-    font-family: 'Avenir Bold';
-    font-weight: normal;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/AvenirLTStd-Black.otf');
+  @keyframes ripple-effect {
+    0% {
+      transform: scale(0);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.35;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
   }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 100;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Light.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 200;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Book.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 300;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Roman.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 350;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Light.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 400;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Medium.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 500;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Heavy.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 600;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Black.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 700;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Black.ttf');
-  }
-
-  @font-face {
-    font-family: 'Avenir';
-    font-weight: 800;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Heavy.ttf');
-  }
-  /* @font-face {
-    font-family: 'Avenir';
-    font-weight: 800;
-    font-style: normal;
-    src: url('../assets/fonts/avenir/Avenir-Black.ttf');
-  } */
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brandColor-active: #008080;
+  --color-brandColor-inactive: #638888;
+  --color-brandColor-yellow: #FEB92B;
+  --color-barchart-yellow: #FEB92B;
+  --color-circle-yellow: #FEB92B;
+  --color-barchart-teal: #008080;
+  --color-piechart-grey: #E5E7EB;
+  --color-border-light: #D1D1D1;
+  --color-profile-gray: #F7F8FA;
+  --color-badge-bg: #E7F6EC;
+  --color-dashboard-bg: #EDF6F6;
+  --color-success-green: #057646;
+  --color-text-primary: #3D3D3D;
+  --color-divider-border: #F0F2F5;
+  --color-table-text: #022F2F;
+  --color-header-gray: #F9FAFB;
+  --color-border-table: #E4E7EC;
+  --color-grey-5: #667185;
+  --color-text-tertiary: #001F1F;
+  --color-mediumGray: #585858;
+  --font-avenir: 'Avenir', sans-serif;
+  --color-primary-gray: #3D3D3D;
+  --color-border-lighten: #E4E7EC;
+  --color-primary-dark: #022F2F;
+  --color-primary-gray: #3D3D3D;
+  --color-primary-border: #E4E7EC;
+  --color-primary-background: #F7F8FA;
+  --color-primary-text: #008080;
+  --color-primary-text-light: #667085;
+  --color-primary-text-dark: #022F2F;
+  --color-primary-text-dark-light: #3D3D3D;
+  --color-input-gray: #4F4F4F;
+  --color-text-gray: #888888;
+  --color-textColor: #02273A;
+  --color-border-lightGray: #E9E9E9;
+  --color-blue-main: #011B60;
+  --color-alert-border: #F4F5F9;
+  --color-alert-gray: #6E6E6E;
+  --color-border-input: #D0D5DD;
+  --color-secondary-text-gray: #344054;
+  --color-blue-main: #011B60;
+  --color-badge-blue: #5988F7;
+  --color-badge-red: #CF000B;
+  --color-primary-lightGreen: #025050;
+  --color-border-gray: #E7E7E7;
+  --color-background-offwhite: #F6F6F6;
+  --color-bg-color: #F9F9F9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Autofill: use transparent background so it matches normal input (#21) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  box-shadow: 0 0 0 30px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  color: #022F2F !important;
+  -webkit-text-fill-color: #022F2F !important;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  background: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  box-shadow: none !important;
+  background: transparent;
+  width: 0px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  box-shadow: none !important;
+  width: 0px;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Light.ttf') format('truetype');
+  font-weight: 300; /* light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-LightOblique.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Roman.ttf') format('truetype');
+  font-weight: 400; /* regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Heavy.ttf') format('truetype');
+  font-weight: 700; /* bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Black.ttf') format('truetype');
+  font-weight: 900; /* black */
+  font-style: normal;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f8fa;
+  /* color: #008080; */
+  /* font-family: 'Avenir', sans-serif; */
 }
+
+/* ChatBubble.css */
+.rce-mbox-text {
+  font-size: 0.75rem !important;
+  color: #374151 !important;     /* Tailwind gray-700 */
+}
+
+.rce-mbox-title {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+}
+

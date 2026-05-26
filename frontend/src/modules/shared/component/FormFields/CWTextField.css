@@ -1,0 +1,17 @@
+.cw-text-field .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  @apply !border-[1px] border-solid;
+}
+
+.cw-text-field:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline,
+.cw-text-field
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  @apply !border-[2px];
+}
+
+.MuiTextarea-variantOutlined.cw-text-area {
+  border: none !important;
+}
+
+
+/* border-primary-light */

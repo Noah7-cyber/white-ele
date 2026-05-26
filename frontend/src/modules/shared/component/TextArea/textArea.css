@@ -1,0 +1,27 @@
+.bd-text-area.MuiTextarea-root.MuiTextarea-variantOutlined {
+  @apply outline outline-[0.5px];
+}
+
+.bd-text-area.MuiTextarea-root.MuiTextarea-variantOutlined:hover,
+.bd-text-area.MuiTextarea-root.MuiTextarea-variantOutlined.Mui-focused {
+  @apply outline-[2px];
+}
+
+.bd-text-area.MuiTextarea-root.MuiTextarea-variantOutlined::before {
+  @apply !hidden;
+}
+/* 
+.bd-text-area.MuiTextarea-root.MuiTextarea-variantOutlined > textarea {
+  @apply ;
+} */
+
+/* Prevent iOS Safari from zooming on textarea focus. */
+.cw-mobile-textarea {
+  font-size: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .cw-mobile-textarea {
+    font-size: 14px !important;
+  }
+}

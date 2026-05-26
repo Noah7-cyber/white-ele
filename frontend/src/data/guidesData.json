@@ -1,0 +1,153 @@
+[
+  {
+    "id": "get-started-admin",
+    "icon": "🚀",
+    "title": "Get Started- Admin",
+    "description": "Streamline your intake process from application to enrollment.",
+    "topics": [
+      { "icon": "🌟", "label": "Sign Up & Getting Started", "slug": "sign-up-and-getting-started" },
+      { "icon": "📊", "label": "Understanding the Dashboard", "slug": "understanding-the-dashboard" },
+      { "icon": "🔵", "label": "Using Full Search Feature", "slug": "using-full-search-feature" },
+      { "icon": "➡️", "label": "Using Quick Actions", "slug": "using-quick-actions" },
+      { "icon": "🔔", "label": "Using Notification Panel", "slug": "using-notification-panel" }
+    ]
+  },
+  {
+    "id": "learning-management",
+    "icon": "📋",
+    "title": "Learning Management",
+    "description": "Configure curriculum, subjects, milestones, grading, and portfolio workflows.",
+    "topics": [
+           { "icon": "📦", "label": "Add & Manage Curriculum", "slug": "add-and-manage-curriculum" },       
+           { "icon": "📚", "label": "Add & Manage Subjects", "slug": "add-and-manage-subjects" },
+           { "icon": "🏁", "label": "Add & Manage Milestones", "slug": "add-and-manage-milestones" },
+           { "icon": "📝", "label": "View & Manage Grading", "slug": "view-and-manage-grading" },
+           { "icon": "🖼️", "label": "Add & Manage Portfolio", "slug": "add-and-manage-portfolio" }
+    ]
+  },
+  {
+    "id": "reports-and-charts",
+    "icon": "📈",
+    "title": "Reports & Charts",
+    "description": "Analyze billing, attendance, children, staff, and admission performance with filters.",
+    "topics": [
+      { "icon": "💰", "label": "Billings Reports", "slug": "billings-reports" },
+      { "icon": "🎯", "label": "Attendance Reports", "slug": "attendance-reports" },
+      { "icon": "👶", "label": "Children Reports", "slug": "children-reports" },
+      { "icon": "👩‍🏫", "label": "Staff Reports", "slug": "staff-reports" },
+      { "icon": "🎓", "label": "Admission Reports", "slug": "admission-reports" }
+    ]
+  },
+  {
+    "id": "setup-your-school-admin",
+    "icon": "🏫",
+    "title": "Setup Your School - Admin",
+    "description": "Set up classes, staff, children, and parent links with reliable onboarding steps.",
+    "topics": [
+      { "icon": "🏠", "label": "How to Create a New Classroom", "slug": "how-to-create-a-new-classroom" },
+      { "icon": "👩‍🏫", "label": "How to Add & Invite Teachers", "slug": "how-to-add-and-invite-teachers" },
+      { "icon": "👶", "label": "How to Add a Children Profile", "slug": "how-to-add-a-children-profile" },
+      { "icon": "👨‍👩‍👧", "label": "How to Add or Link Parents", "slug": "how-to-add-or-link-parents" }
+    ]
+  },
+  {
+    "id": "admission-management",
+    "icon": "🎫",
+    "title": "Admission Management",
+    "description": "Manage events, tours, forms, leads, and admission decisions from one pipeline.",
+    "topics": [
+      { "icon": "📅", "label": "View Events Calendar", "slug": "view-events-calendar" },
+      { "icon": "🏛️", "label": "Manage Tours & Forms", "slug": "manage-tours-and-forms" },
+      { "icon": "📬", "label": "Manage Leads & Requests", "slug": "manage-leads-and-requests" },
+      { "icon": "🎓", "label": "Manage Admissions", "slug": "manage-admissions" }
+    ]
+  },
+  {
+    "id": "attendance-reports",
+    "icon": "⏰",
+    "title": "Attendance Reports",
+    "description": "Stay connected with parents and staff through integrated messaging.",
+    "topics": [
+      { "icon": "👶", "label": "Child Attendance Sheet", "slug": "child-attendance-sheet" },
+      { "icon": "👩‍🏫", "label": "Teacher Attendance Sheet", "slug": "teacher-attendance-sheet" },
+      { "icon": "📊", "label": "Combined Attendance Sheet", "slug": "combined-attendance-sheet" }
+    ]
+  },
+  {
+    "id": "communication-and-messaging",
+    "icon": "💬",
+    "title": "Communication & Messaging",
+    "description": "Manage fees, generate invoices, and process payments securely.",
+    "topics": [
+      { "icon": "👨‍👩‍👧", "label": "Parent Messaging", "slug": "parent-messaging" },
+      { "icon": "💬", "label": "Teacher Messaging", "slug": "teacher-messaging" },
+      { "icon": "📢", "label": "Create Announcements", "slug": "create-announcements" }
+    ]
+  },
+  {
+    "id": "billing-and-invoicing",
+    "icon": "💵",
+    "title": "Billing & Invoicing",
+    "description": "Streamline your intake process from application to enrollment.",
+    "topics": [
+      { "icon": "🧾", "label": "Create Single Invoice", "slug": "create-single-invoice" },
+      { "icon": "🔄", "label": "Create Recurring Invoice", "slug": "create-recurring-invoice" }
+    ]
+  },
+  {
+    "id": "using-the-kiosk-app",
+    "icon": "📱",
+    "title": "Using the Kiosk App",
+    "description": "Manage fees, generate invoices, and process payments securely.",
+    "topics": [
+      { "icon": "✅", "label": "Clock In Using Kiosk", "slug": "clock-in-using-kiosk" },
+      { "icon": "🚪", "label": "Clock Out Using Kiosk", "slug": "clock-out-using-kiosk" },
+      { "icon": "🔑", "label": "Resent Kiosk PIN", "slug": "reset-kiosk-pin" }
+    ]
+  },
+  {
+    "id": "classroom-and-activities-management",
+    "icon": "🎨",
+    "title": "Classroom & Activities Management",
+    "description": "Stay connected with parents and staff through integrated messaging.",
+    "topics": [
+      { "icon": "🏠", "label": "Add & Manage Classrooms", "slug": "add-and-manage-classrooms" },
+      { "icon": "🎨", "label": "Activities Dashboard", "slug": "activities-dashboard" },
+      { "icon": "😴", "label": "Log Nap Time", "slug": "log-nap-time" },
+      { "icon": "🍽️", "label": "Log Meals", "slug": "log-meals" },
+      { "icon": "💧", "label": "Log Water Intake", "slug": "log-water-intake" },
+      { "icon": "📷", "label": "Add & Upload Photos", "slug": "add-and-upload-photos" },
+      { "icon": "💊", "label": "Log Medication", "slug": "log-medication" },
+      { "icon": "🧷", "label": "Log Bathroom/Diaper Changes", "slug": "log-bathroom-diaper-changes" }
+    ]
+  },
+  {
+    "id": "school-settings",
+    "icon": "🏫",
+    "title": "School Settings",
+    "description": "Stay connected with parents and staff through integrated messaging.",
+    "topics": [
+      { "icon": "🏫", "label": "Manage School Profile", "slug": "manage-school-profile" },
+      { "icon": "🔒", "label": "Account & Security", "slug": "account-and-security" },
+      { "icon": "🔔", "label": "Customize Notification", "slug": "customize-notification" },
+      { "icon": "🔗", "label": "Manage Public Links", "slug": "manage-public-links" },
+      { "icon": "👥", "label": "Manage Admin Users", "slug": "manage-admin-users" },
+      { "icon": "💳", "label": "Setup Payment Methods", "slug": "setup-payment-methods" }
+    ]
+  },
+  {
+    "id": "parent-dashboard",
+    "icon": "👨‍👩‍👧",
+    "title": "Parent Dashboard",
+    "description": "Stay connected with parents and staff through integrated messaging.",
+    "topics": [
+      { "icon": "🏠", "label": "Understanding My Dashboard", "slug": "understanding-my-dashboard" },
+      { "icon": "👶", "label": "My Child's Profile & Management", "slug": "my-childs-profile-and-management" },
+      { "icon": "👩‍🏫", "label": "My Child's Activities", "slug": "my-childs-activities" },
+      { "icon": "💬", "label": "Messaging & Announcements", "slug": "messaging-and-announcements" },
+      { "icon": "🧾", "label": "Manage My Invoices", "slug": "manage-my-invoices" },
+      { "icon": "👤", "label": "Manage My Profile", "slug": "manage-my-profile" },
+      { "icon": "📱", "label": "Add App Link to Your Home Screen", "slug": "add-app-link-to-home-screen" }
+    ]
+  }
+]

@@ -10,6 +10,20 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // ADD THIS BLOCK ↓↓↓
+  {
+    ignores: [
+      "node_modules",
+      ".next",
+      "dist",
+      "build",
+      "coverage",
+      ".eslintcache",
+      "public",
+    ],
+  },
+
+  // your existing Next.js defaults
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

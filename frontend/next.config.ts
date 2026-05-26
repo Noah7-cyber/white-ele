@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextConfig } from "next";
+
+const configuredHosts = ["storage.googleapis.com"] as const;
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactStrictMode: true,
+  reactStrictMode: false,
   turbopack: {
     rules: {
       "*.svg": {
@@ -17,6 +20,43 @@ const nextConfig: NextConfig = {
       use: ["@svgr/webpack"],
     });
     return config;
+  },
+  // allowedDevOrigins: ["app.whitepenguin.ng", "localhost:3000"],
+
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/admin/dashboard", // Default root redirect (optional)
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: "/admin",
+  //       destination: "/admin/dashboard",
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: "/staff",
+  //       destination: "/staff/dashboard",
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: "/parent",
+  //       destination: "/parent/dashboard",
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
+  images: {
+    remotePatterns: [...configuredHosts.map((hostname) => ({
+        protocol: "https" as const,
+        hostname,
+      })),
+      {
+        protocol: "https" as const,
+        hostname: "**.storage.googleapis.com",
+      },
+    ],
   },
 };
 

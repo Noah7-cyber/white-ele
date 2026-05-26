@@ -1,0 +1,9 @@
+export { default as MilestonesPage } from "./MilestonesPage/MilestonesPage";
+export { default as SubjectsPage } from "./SubjectsPage/SubjectsPage";
+export { default as ManageSubject } from "./ManageSubject/manageSubject";
+export { default as CurriculumPage } from "./CurriculumPage/CurriculumPage";
+export { default as TemplateLibraryPage } from "./TemplateLibraryPage/TemplateLibraryPage";
+export { default as MyLibraryPage } from "./MyLearningPage/MyLibraryPage";
+export { default as GradingPage } from "./GradingPage/GradingPage";
+export { default as ViewGradePage } from "./ViewGradingPage/ViewGradePage";
+export { default as ReportPage } from "./ReportPage/ReportPage";

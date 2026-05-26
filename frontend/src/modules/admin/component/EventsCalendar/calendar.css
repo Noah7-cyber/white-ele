@@ -1,0 +1,278 @@
+.fc {
+  border-radius: 12px; /* adjust as you like */
+  overflow: hidden; /* ensures child elements don't stick out */
+  border: 1px solid white;
+}
+/* Remove outer borders of FullCalendar grid */
+.fc-theme-standard .fc-scrollgrid {
+  border: none !important;
+}
+/* Increase space between hours */
+.fc .fc-timegrid-slot {
+  height: 70px !important;
+  padding: 10px 18px 10px 12px !important;
+}
+
+/* Adjust hour label font */
+.fc .fc-timegrid-slot-label {
+  font-size: 12px !important;
+  font-weight: 500;
+  text-transform: uppercase !important;
+  color: #62748e; 
+}
+
+/* Optional: smaller event text */
+.fc .fc-event-title {
+  font-size: 0.85rem !important;
+}
+.fc .fc-day-today {
+  background-color: white !important; /* Light teal */
+}
+.custom-now-line {
+  position: absolute;
+  left: 0;
+  right: 8px;
+  height: 2px;
+  background-color: #fe4711; /* Tailwind red-500 */
+  border-radius: 9999px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Circular ends */
+.custom-now-line::before,
+.custom-now-line::after {
+  content: "";
+  position: absolute;
+  top: 30%;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/* Left end */
+.custom-now-line::before {
+  left: -1px;
+}
+
+/* Right end */
+.custom-now-line::after {
+  right: -7px;
+}
+
+/* Remove blue background from events */
+.fc-event,
+.fc-timegrid-event,
+.fc-daygrid-event {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep text readable */
+.fc-event-title,
+.fc-event-time {
+  color: #000 !important; /* or your preferred text color */
+}
+
+/* Optional: remove hover background */
+.fc-event:hover {
+  background-color: transparent !important;
+}
+
+/* === FullCalendar Grid Line Color Customization === */
+
+/* Horizontal slot lines (for time grid view) */
+.fc-theme-standard .fc-timegrid-slot {
+  border-color: #F5F6F7 !important;
+  border-width: 2px; /* light gray (Tailwind gray-200) */
+}
+
+/* Vertical day separators */
+.fc-theme-standard .fc-timegrid-col {
+  border-color: #F5F6F7 !important;
+  border-width: 2px;
+}
+
+/* Optional: header line */
+.fc-theme-standard .fc-col-header-cell {
+  border-color: #F5F6F7 !important;
+  border-width: 2px;
+}
+/* Monthly grid cell borders */
+.fc-theme-standard .fc-daygrid-day {
+  border-color: #F5F6F7 !important;
+  border-width: 2px;
+}
+
+.fc-timegrid-event-harness {
+  min-height: 50px !important;
+  max-height: 70px !important; /* fills its time slot */
+}
+
+.teal span {
+  background-color: #005F73;
+}
+.orange span {
+  background-color: #FE4711;
+}
+.blue span {
+  background-color: #0283C6;
+}
+.purple span {
+  background-color: #7C3AEC;
+}
+.green span {
+  background-color: #17B26A;
+}
+
+.mobile-event-card {
+  position: relative;
+  display: flex;
+  min-height: 92px;
+  width: 100%;
+  align-items: flex-start;
+  border-radius: 18px;
+  background: #fff;
+  padding: 14px 14px 14px 0;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.mobile-event-accent {
+  width: 4px;
+  min-width: 4px;
+  align-self: stretch;
+  margin-left: 8px;
+  border-radius: 9999px;
+  background: currentColor;
+}
+
+.mobile-event-card.teal {
+  color: #127A8A;
+}
+
+.mobile-event-card.orange {
+  color: #FE4711;
+}
+
+.mobile-event-card.purple {
+  color: #7C3AEC;
+}
+
+.mobile-event-card.blue {
+  color: #0283C6;
+}
+.mobile-event-card.green {
+  color: #17B26A;
+}
+
+@media (max-width: 768px) {
+  .events-calendar-mobile {
+    overflow: hidden;
+  }
+
+  .events-calendar-mobile .fc-header-toolbar,
+  .events-calendar-mobile .fc-col-header {
+    display: none !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-slot {
+    height: 72px !important;
+    padding: 8px 10px 8px 0 !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-axis {
+    width: 54px !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-slot-label {
+    padding-right: 12px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #98A2B3 !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-axis-cushion,
+  .events-calendar-mobile .fc .fc-timegrid-slot-label-cushion {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-divider,
+  .events-calendar-mobile .fc .fc-timegrid-axis-frame {
+    background: #fff !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-col-frame {
+    min-height: auto !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-body,
+  .events-calendar-mobile .fc .fc-timegrid-body table,
+  .events-calendar-mobile .fc .fc-timegrid-cols table {
+    width: 100% !important;
+  }
+
+  .events-calendar-mobile .fc-timegrid-event-harness {
+    inset-inline: 0 8px !important;
+    min-height: 86px !important;
+    max-height: none !important;
+  }
+
+  .events-calendar-mobile .fc-timegrid-event-harness-inset .fc-timegrid-event,
+  .events-calendar-mobile .fc-timegrid-event {
+    inset: 0 !important;
+  }
+
+  .events-calendar-mobile .fc .fc-timegrid-event {
+    border-radius: 18px !important;
+  }
+
+  .events-calendar-mobile .custom-now-line {
+    right: 12px;
+  }
+}
+
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  border-top: 1px solid #eaecf0;
+  background: #fff;
+}
+
+.calendar-legend.border-t-0 {
+  border-top: none !important;
+}
+
+.calendar-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.calendar-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.rounded-xl {
+  border-radius: 24px !important;
+}
+
+.mobile-calendar-card {
+  background: #ffffff;
+  border: 1px solid #f2f4f7;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+}
+

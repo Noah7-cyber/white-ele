@@ -1,0 +1,3 @@
+.component-color-picker .color-badge {
+  @apply relative flex h-[18px] w-[18px] items-center justify-center before:absolute before:h-[14px] before:w-[14px] before:border before:border-solid;
+}

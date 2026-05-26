@@ -1,0 +1,9 @@
+.dropdown-select-dialog
+  .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root
+  .MuiListItemIcon-root {
+  min-width: 20px !important;
+}
+
+.menu-list .MuiButtonBase-root:hover {
+  background-color: #e6f1fb;
+}

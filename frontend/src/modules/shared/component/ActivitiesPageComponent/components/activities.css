@@ -1,0 +1,6 @@
+.time-picker-lg-icon input[type="time"]::-webkit-calendar-picker-indicator {
+    width: 20px !important;
+    height: 20px !important;
+    opacity: .5 !important;
+    cursor: pointer;
+}

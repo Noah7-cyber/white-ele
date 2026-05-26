@@ -1,0 +1,49 @@
+name: Deploy White Penguin
+
+on:
+  push:
+    branches: [development]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_AUTH_APP_SUBDOMAIN: app
+          NEXT_PUBLIC_APP_DOMAIN: whitepenguin.heimdallprodev.com
+          NEXT_PUBLIC_API_URL: https://whitepenguin-api.heimdallprodev.com
+          WEBSOCKET_URL: https://whitepenguin-api.heimdallprodev.com
+
+      - name: Upload to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: ".next,public,package.json,node_modules,ecosystem.config.js"
+          target: "/home/ubuntu/whitepenguin"
+
+      - name: Restart app
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # load nvm
+            cd /home/ubuntu/whitepenguin
+            pm2 reload ecosystem.config.js --env production
