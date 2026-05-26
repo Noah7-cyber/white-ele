@@ -461,16 +461,6 @@ export class AuthService {
       // Role selection is based on linked role relations (admin/parent/staff), not only user.role.
       const allAccounts = typeof contextSchoolId === "number" ? (users || []).filter((u: any) => u?.schoolId === contextSchoolId) : users;
 
-      // Check verification status before role block
-      const verificationCheck = this.checkVerificationStatus(activeUser, data.email, data.phone);
-      if (!verificationCheck.verified) {
-        return {
-          success: false,
-          code: "EMAIL_UNVERIFIED",
-          message: verificationCheck.message || "Verification required",
-        };
-      }
-
       let requestedRole: UserRole | undefined = data.role;
       let activeAccount: any = undefined;
 
@@ -544,6 +534,8 @@ export class AuthService {
           email: activeUser.email || "",
           phone: activeUser.phone || "",
           role: activeUser.role,
+          isVerified: activeUser.emailVerified,
+          schoolId: contextSchoolId || null,
         });
 
         return {
@@ -570,6 +562,8 @@ export class AuthService {
         email: activeUser.email || "",
         phone: activeUser.phone || "",
         role: activeUser.role,
+        isVerified: activeUser.emailVerified,
+        schoolId: contextSchoolId || null,
         sessionId: session.id,
       });
 
@@ -674,6 +668,8 @@ export class AuthService {
         email: user.email || "",
         phone: user.phone || "",
         role: user.role,
+        isVerified: user.emailVerified,
+        schoolId: null,
         sessionId: session.id,
       });
 
@@ -1285,6 +1281,8 @@ export class AuthService {
           email: user.email || "",
           phone: user.phone || "",
           role: user.role,
+          isVerified: user.emailVerified,
+          schoolId: null,
           sessionId: session.id,
         });
 
@@ -1336,6 +1334,8 @@ export class AuthService {
         email: user.email || "",
         phone: user.phone || "",
         role: user.role,
+        isVerified: user.emailVerified,
+        schoolId: null,
         sessionId: session.id,
       });
 
@@ -1518,17 +1518,6 @@ export class AuthService {
     return [];
   }
 
-  private checkVerificationStatus(user: User, email?: string, phone?: string): { verified: boolean; message?: string } {
-    if (email && !user.emailVerified) {
-      return { verified: false, message: AUTH_MESSAGES.EMAIL_NOT_VERIFIED };
-    }
-
-    if (phone && !user.phoneVerified) {
-      return { verified: false, message: AUTH_MESSAGES.PHONE_NOT_VERIFIED };
-    }
-
-    return { verified: true };
-  }
 
   private async hasRoleAssociation(userId: number, role: UserRole, schoolId?: number): Promise<boolean> {
     const userWithRelations = await this.userRepository.findOne({

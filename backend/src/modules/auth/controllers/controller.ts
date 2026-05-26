@@ -315,6 +315,8 @@ export class AuthController {
         email: user.email || "",
         phone: user.phone || "",
         role: user.role,
+        isVerified: user.emailVerified,
+        schoolId: null, // Note: For refresh, ideally we'd preserve the context, but setting to null for now
         sessionId: sessionId || 0,
       });
 

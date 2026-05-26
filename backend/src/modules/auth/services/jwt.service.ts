@@ -80,11 +80,13 @@ export class JWTService {
   /**
    * Generate refresh token
    */
-  generateRefreshToken(userId: number, sessionId?: number, role?: string): string {
+  generateRefreshToken(userId: number, sessionId?: number, role?: string, isVerified?: boolean, schoolId?: number | null): string {
     const payload = {
       userId,
       sessionId: sessionId || "",
       role: role || "customer", // Use provided role or default to customer
+      isVerified: isVerified ?? true,
+      schoolId: schoolId ?? null,
       tokenType: "refresh" as const,
     };
 
@@ -301,7 +303,7 @@ export class JWTService {
     refreshToken: string;
   } {
     const accessToken = this.generateAccessToken(payload);
-    const refreshToken = this.generateRefreshToken(payload.userId, payload.sessionId, payload.role);
+    const refreshToken = this.generateRefreshToken(payload.userId, payload.sessionId, payload.role, payload.isVerified, payload.schoolId);
 
     return { accessToken, refreshToken };
   }

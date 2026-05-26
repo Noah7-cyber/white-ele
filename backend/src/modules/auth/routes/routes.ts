@@ -129,6 +129,7 @@ if (process.env["NODE_ENV"] !== "production") {
         userId: Number(userId),
         email: "test@example.com",
         role: "customer" as any,
+        isVerified: true,
       });
 
       res.json({
