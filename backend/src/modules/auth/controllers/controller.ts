@@ -60,6 +60,16 @@ export class AuthController {
       const result = await authService.login({ ...req.body, schoolId: contextSchoolId ?? bodySchoolId }, deviceInfo);
 
       const statusCode = result.success ? 200 : 401;
+
+      if (!result.success && result.code) {
+        // Embed the custom code inside the error response properly so it can be caught
+        res.status(statusCode).json({
+          ...result,
+          errors: [{ code: result.code, msg: result.message }]
+        });
+        return;
+      }
+
       res.status(statusCode).json(result);
     } catch (error) {
       console.error("Login error:", error);

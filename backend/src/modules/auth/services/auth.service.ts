@@ -461,16 +461,35 @@ export class AuthService {
       // Role selection is based on linked role relations (admin/parent/staff), not only user.role.
       const allAccounts = typeof contextSchoolId === "number" ? (users || []).filter((u: any) => u?.schoolId === contextSchoolId) : users;
 
+      // Check verification status before role block
+      const verificationCheck = this.checkVerificationStatus(activeUser, data.email, data.phone);
+      if (!verificationCheck.verified) {
+        return {
+          success: false,
+          code: "EMAIL_UNVERIFIED",
+          message: verificationCheck.message || "Verification required",
+        };
+      }
+
       let requestedRole: UserRole | undefined = data.role;
       let activeAccount: any = undefined;
 
       if (requestedRole) {
         const hasRequestedRoleAssociation = await this.hasRoleAssociation(activeUser.id, requestedRole, contextSchoolId);
         if (!hasRequestedRoleAssociation) {
-          return {
-            success: false,
-            message: AUTH_MESSAGES.ROLE_ACCOUNT_NOT_FOUND,
-          };
+          // If admin and they don't have an association, let them through
+          // so the frontend can redirect to create-school.
+          // IMPORTANT: Only bypass if their activeUser.role inherently is ADMIN or SUPER_ADMIN
+          if (requestedRole === UserRole.ADMIN && typeof contextSchoolId !== "number" && (activeUser.role === UserRole.ADMIN || activeUser.role === UserRole.SUPER_ADMIN)) {
+            // Bypass block, let them login as admin so frontend redirects
+            activeUser.role = requestedRole; // ensure role is set to ADMIN
+          } else {
+            return {
+              success: false,
+              code: "ROLE_NOT_ALLOWED",
+              message: AUTH_MESSAGES.ROLE_ACCOUNT_NOT_FOUND,
+            };
+          }
         }
       }
 
@@ -504,20 +523,13 @@ export class AuthService {
         }
 
         // This might happen if they have a User record but no role associations yet
-        // We'll proceed with the authenticated record's defaults
-        requestedRole = activeUser.role;
+        // We'll proceed with the authenticated record's defaults unless we are bypassing
+        if (!requestedRole || (requestedRole !== UserRole.ADMIN)) {
+          requestedRole = activeUser.role;
+        }
       }
 
       activeUser.role = requestedRole!;
-
-      // Check verification status
-      const verificationCheck = this.checkVerificationStatus(activeUser, data.email, data.phone);
-      if (!verificationCheck.verified) {
-        return {
-          success: false,
-          message: verificationCheck.message || "Verification required",
-        };
-      }
 
       // Reset login attempts on successful login
       await this.userRepository.update(activeUser.id, {
