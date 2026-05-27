@@ -21,8 +21,8 @@ export const authOptions: NextAuthOptions = {
         if (!res.ok) return null;
         const user = await res.json();
 
-        // Decode the JWT access token to extract isVerified and schoolId
-        let isVerified = true;
+        // Decode the JWT access token to extract emailVerified and schoolId
+        let emailVerified = true;
         let schoolId = null;
         if (user.accessToken) {
           try {
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
                 .join('')
             );
             const decoded = JSON.parse(jsonPayload);
-            isVerified = decoded.isVerified ?? true;
+            emailVerified = decoded.emailVerified ?? false;
             schoolId = decoded.schoolId ?? null;
           } catch (e) {
             console.error('Failed to decode token', e);
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           role: user.role,
           accessToken: user.accessToken,
-          isVerified,
+          emailVerified,
           schoolId,
         };
       },
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.role = user.role;
         token.accessToken = (user as { accessToken: string | number }).accessToken;
-        token.isVerified = (user as any).isVerified;
+        token.emailVerified = (user as any).emailVerified ?? false;
         token.schoolId = (user as any).schoolId;
       }
 
@@ -97,7 +97,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.role = token.role as string;
         (session.user as any).accessToken = token.accessToken;
-        (session.user as any).isVerified = token.isVerified;
+        (session.user as any).emailVerified = token.emailVerified ?? false;
         (session.user as any).schoolId = token.schoolId;
       }
       return session;
